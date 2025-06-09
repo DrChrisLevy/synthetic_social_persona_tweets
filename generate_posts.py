@@ -658,11 +658,10 @@ Generate 50-100 realistic social media posts that this account would make. Each 
 7. For bot accounts: show automated or systematic posting patterns
 8. For spam/scam accounts: use manipulative language and questionable offers typical of scams
 
-Format each post as:
-POST [number]:
-[post content]
+Be creative and authentic - make these posts feel like they come from this specific type of account
 
-Be creative and authentic - make these posts feel like they come from this specific type of account."""
+
+Return a list of 50-100 posts seperated by double newlines."""
 
     return prompt
 
