@@ -194,6 +194,176 @@ PERSONAS_BY_TYPE = {
 }
 
 
+# Persona-specific modifier mappings for deterministic behavior
+PERSONA_MODIFIER_MAPPINGS = {
+    # Teen personas (13-22)
+    "anxiety_ridden_high_schooler": {
+        "life_stage": "teenager",
+        "education_level": ["high_school_dropout", "high_school_grad"],
+        "communication_style": "anxious_oversharing",
+        "primary_topic": "personal_struggles"
+    },
+    "competitive_teenage_athlete": {
+        "life_stage": "teenager", 
+        "education_level": ["high_school_grad", "some_college"],
+        "primary_topic": "achievements_bragging"
+    },
+    "theatre_kid_and_proud": {
+        "life_stage": "teenager",
+        "education_level": ["high_school_grad", "some_college"]
+    },
+    
+    # Student personas
+    "art_student_with_strong_opinions": {
+        "life_stage": "college_student",
+        "education_level": ["some_college", "college_degree"],
+        "political_leaning": ["far_left_progressive", "liberal_democrat"]
+    },
+    
+    # Professional personas (23-32)
+    "burned_out_corporate_lawyer": {
+        "life_stage": "young_professional",
+        "education_level": "graduate_degree"
+    },
+    "enthusiastic_kindergarten_teacher": {
+        "life_stage": "young_professional", 
+        "education_level": ["college_degree", "graduate_degree"]
+    },
+    "struggling_freelance_designer": {
+        "life_stage": "young_professional",
+        "education_level": ["college_degree", "some_college", "trade_school"]
+    },
+    "tech_bro_with_startup_dreams": {
+        "life_stage": "young_professional",
+        "education_level": ["college_degree", "graduate_degree", "some_college"]
+    },
+    "nurse_working_night_shifts": {
+        "life_stage": "young_professional",
+        "education_level": ["college_degree", "trade_school", "graduate_degree"]
+    },
+    
+    # Parent personas (25-45)
+    "helicopter_mom_of_twins": {
+        "life_stage": "parent",
+        "primary_topic": "family_kids",
+        "education_level": ["college_degree", "some_college", "graduate_degree"]
+    },
+    "single_dad_juggling_work_life": {
+        "life_stage": "parent",
+        "primary_topic": "family_kids", 
+        "education_level": ["college_degree", "some_college", "high_school_grad"]
+    },
+    "homeschooling_parent_activist": {
+        "life_stage": "parent",
+        "primary_topic": "family_kids",
+        "education_level": ["college_degree", "graduate_degree", "some_college"],
+        "political_leaning": ["conservative_republican", "far_right_extremist", "moderate_centrist"]
+    },
+    
+    # Middle-aged personas (35-55)
+    "midlife_crisis_divorcee": {
+        "life_stage": "middle_aged",
+        "education_level": ["college_degree", "some_college", "high_school_grad"]
+    },
+    "wine_mom_book_club_president": {
+        "life_stage": "middle_aged",
+        "education_level": ["college_degree", "graduate_degree", "some_college"]
+    },
+    "weekend_warrior_mountain_biker": {
+        "life_stage": "middle_aged",
+        "education_level": ["college_degree", "some_college", "trade_school"]
+    },
+    "conspiracy_theory_uncle": {
+        "life_stage": "middle_aged",
+        "education_level": ["high_school_grad", "some_college", "college_degree"],
+        "political_leaning": ["far_right_extremist", "conservative_republican"]
+    },
+    
+    # Retired personas (55+)
+    "facebook_grandma_oversharer": {
+        "life_stage": "retired",
+        "education_level": ["high_school_grad", "some_college", "college_degree"]
+    },
+    "retired_professor_still_teaching": {
+        "life_stage": "retired",
+        "education_level": "graduate_degree",
+        "political_leaning": ["liberal_democrat", "moderate_centrist", "far_left_progressive"]
+    },
+    "grumpy_boomer_hates_technology": {
+        "life_stage": "retired",
+        "education_level": ["high_school_grad", "some_college", "college_degree"],
+        "political_leaning": ["conservative_republican", "far_right_extremist"]
+    }
+}
+
+# System prompt section configurations for each account type
+PROMPT_SECTIONS_BY_ACCOUNT_TYPE = {
+    "individual": {
+        "section_title": "PERSONALITY & STYLE:",
+        "modifier_labels": {
+            "communication_style": "Communication",
+            "posting_mood": "Typical Mood", 
+            "life_stage": "Life Stage",
+            "primary_topic": "Main Topics",
+            "education_level": "Education",
+            "political_leaning": "Politics"
+        }
+    },
+    "brand_business": {
+        "section_title": "BRAND CHARACTERISTICS:",
+        "modifier_labels": {
+            "brand_voice": "Brand Voice",
+            "marketing_style": "Marketing Style",
+            "business_stage": "Business Stage", 
+            "target_audience": "Target Audience",
+            "content_focus": "Content Focus"
+        }
+    },
+    "influencer_public_figure": {
+        "section_title": "INFLUENCER PROFILE:",
+        "modifier_labels": {
+            "influencer_persona": "Influencer Style",
+            "content_style": "Content Style",
+            "follower_relationship": "Follower Relationship",
+            "monetization_approach": "Monetization"
+        }
+    },
+    "media_news": {
+        "section_title": "MEDIA PROFILE:",
+        "modifier_labels": {
+            "editorial_stance": "Editorial Stance",
+            "reporting_style": "Reporting Style",
+            "audience_tone": "Audience Tone",
+            "content_priority": "Content Focus"
+        }
+    },
+    "bot": {
+        "section_title": "BOT CHARACTERISTICS:",
+        "modifier_labels": {
+            "bot_personality": "Bot Personality",
+            "response_pattern": "Response Pattern",
+            "content_type": "Content Type"
+        }
+    },
+    "spam_scam": {
+        "section_title": "SCAM CHARACTERISTICS:",
+        "modifier_labels": {
+            "scam_approach": "Scam Approach",
+            "writing_quality": "Writing Quality",
+            "target_vulnerability": "Target Vulnerability"
+        }
+    },
+    "creative_meme": {
+        "section_title": "MEME CHARACTERISTICS:",
+        "modifier_labels": {
+            "humor_style": "Humor Style",
+            "meme_format": "Meme Format",
+            "target_demographic": "Target Demographic",
+            "content_freshness": "Content Freshness"
+        }
+    }
+}
+
 # Account-type-specific modifiers that directly influence text generation
 MODIFIERS_BY_ACCOUNT_TYPE = {
     "individual": {
@@ -264,88 +434,26 @@ def sample_persona(account_type: str) -> str:
     return random.choice(PERSONAS_BY_TYPE[account_type])
 
 def sample_modifiers(account_type: str, persona: str = None) -> dict:
-    """Pick modifiers appropriate for account type with deterministic persona-based logic."""
+    """Pick modifiers appropriate for account type using clean data-driven approach."""
     
     # Get account-type-specific modifiers
-    modifiers = MODIFIERS_BY_ACCOUNT_TYPE.get(account_type, {})
-    
-    # Simple deterministic mapping based on persona name patterns
+    available_modifiers = MODIFIERS_BY_ACCOUNT_TYPE.get(account_type, {})
     result = {}
     
-    for category, options in modifiers.items():
-        if account_type == "individual" and persona:
-            # Individual account logic based on persona names
-            if "high_schooler" in persona or "teenage" in persona or "theatre_kid" in persona:
-                if category == "life_stage":
-                    result[category] = "teenager"
-                elif category == "education_level":
-                    result[category] = random.choice(["high_school_dropout", "high_school_grad"])
-                elif category == "communication_style" and "anxiety" in persona:
-                    result[category] = "anxious_oversharing"
-                elif category == "primary_topic" and "athlete" in persona:
-                    result[category] = "achievements_bragging"
-                else:
-                    result[category] = random.choice(options)
-                    
-            elif "student" in persona:
-                if category == "life_stage":
-                    result[category] = "college_student"
-                elif category == "education_level":
-                    result[category] = random.choice(["some_college", "college_degree"])
-                else:
-                    result[category] = random.choice(options)
-                    
-            elif any(word in persona for word in ["lawyer", "teacher", "designer", "tech_bro", "nurse"]):
-                if category == "life_stage":
-                    result[category] = "young_professional"
-                elif category == "education_level":
-                    if "lawyer" in persona:
-                        result[category] = "graduate_degree"
-                    elif "teacher" in persona:
-                        result[category] = random.choice(["college_degree", "graduate_degree"])
-                    else:
-                        result[category] = random.choice(["college_degree", "some_college"])
-                else:
-                    result[category] = random.choice(options)
-                    
-            elif any(word in persona for word in ["mom", "dad", "parent"]) and "wine_mom" not in persona:
-                if category == "life_stage":
-                    result[category] = "parent"
-                elif category == "primary_topic":
-                    result[category] = "family_kids"
-                elif category == "education_level":
-                    result[category] = random.choice(["college_degree", "some_college", "high_school_grad"])
-                else:
-                    result[category] = random.choice(options)
-                    
-            elif any(word in persona for word in ["midlife", "weekend_warrior", "conspiracy", "uncle"]) or "wine_mom" in persona:
-                if category == "life_stage":
-                    result[category] = "middle_aged"
-                elif category == "education_level":
-                    result[category] = random.choice(["college_degree", "some_college", "high_school_grad"])
-                elif category == "political_leaning" and "conspiracy" in persona:
-                    result[category] = random.choice(["far_right_extremist", "conservative_republican"])
-                else:
-                    result[category] = random.choice(options)
-                    
-            elif any(word in persona for word in ["grandma", "retired", "boomer"]):
-                if category == "life_stage":
-                    result[category] = "retired"
-                elif category == "education_level":
-                    if "professor" in persona:
-                        result[category] = "graduate_degree"
-                    else:
-                        result[category] = random.choice(["high_school_grad", "some_college", "college_degree"])
-                elif category == "political_leaning" and "boomer" in persona:
-                    result[category] = random.choice(["conservative_republican", "far_right_extremist"])
-                else:
-                    result[category] = random.choice(options)
+    # Get persona-specific mappings if available
+    persona_mappings = PERSONA_MODIFIER_MAPPINGS.get(persona, {}) if persona else {}
+    
+    # For each modifier category, use persona mapping or random choice
+    for category, options in available_modifiers.items():
+        if category in persona_mappings:
+            # Use persona-specific mapping
+            persona_value = persona_mappings[category]
+            if isinstance(persona_value, list):
+                result[category] = random.choice(persona_value)
             else:
-                # Fallback for any unmatched individual personas
-                result[category] = random.choice(options)
-                
+                result[category] = persona_value
         else:
-            # For non-individual accounts, just use random sampling
+            # Fall back to random sampling from available options
             result[category] = random.choice(options)
     
     return result
@@ -361,7 +469,7 @@ def sample_account() -> dict:
     }
 
 def generate_system_prompt(account: dict) -> str:
-    """Generate a system prompt for LLM post generation based on account characteristics."""
+    """Generate a system prompt for LLM post generation using data-driven approach."""
     
     persona = account["persona"]
     modifiers = account["modifiers"]
@@ -369,108 +477,26 @@ def generate_system_prompt(account: dict) -> str:
     
     # Convert underscores to spaces and title case for readability
     persona_readable = persona.replace("_", " ").title()
+    account_type_readable = account_type.replace("_", " ").title()
     
-    # Build modifier descriptions dynamically based on what's available
+    # Build modifier sections using data-driven configuration
     modifier_sections = []
     
-    # Individual account modifiers
-    if account_type == "individual":
-        if modifiers:
-            modifier_sections.append("PERSONALITY & STYLE:")
-            if "communication_style" in modifiers:
-                modifier_sections.append(f"- Communication: {modifiers['communication_style'].replace('_', ' ').title()}")
-            if "posting_mood" in modifiers:
-                modifier_sections.append(f"- Typical Mood: {modifiers['posting_mood'].replace('_', ' ').title()}")
-            if "life_stage" in modifiers:
-                modifier_sections.append(f"- Life Stage: {modifiers['life_stage'].replace('_', ' ').title()}")
-            if "primary_topic" in modifiers:
-                modifier_sections.append(f"- Main Topics: {modifiers['primary_topic'].replace('_', ' ').title()}")
-            if "education_level" in modifiers:
-                modifier_sections.append(f"- Education: {modifiers['education_level'].replace('_', ' ').title()}")
-            if "political_leaning" in modifiers:
-                modifier_sections.append(f"- Politics: {modifiers['political_leaning'].replace('_', ' ').title()}")
-    
-    # Brand/Business account modifiers
-    elif account_type == "brand_business":
-        if modifiers:
-            modifier_sections.append("BRAND CHARACTERISTICS:")
-            if "brand_voice" in modifiers:
-                modifier_sections.append(f"- Brand Voice: {modifiers['brand_voice'].replace('_', ' ').title()}")
-            if "marketing_style" in modifiers:
-                modifier_sections.append(f"- Marketing Style: {modifiers['marketing_style'].replace('_', ' ').title()}")
-            if "business_stage" in modifiers:
-                modifier_sections.append(f"- Business Stage: {modifiers['business_stage'].replace('_', ' ').title()}")
-            if "target_audience" in modifiers:
-                modifier_sections.append(f"- Target Audience: {modifiers['target_audience'].replace('_', ' ').title()}")
-            if "content_focus" in modifiers:
-                modifier_sections.append(f"- Content Focus: {modifiers['content_focus'].replace('_', ' ').title()}")
-    
-    # Influencer account modifiers
-    elif account_type == "influencer_public_figure":
-        if modifiers:
-            modifier_sections.append("INFLUENCER PROFILE:")
-            if "influencer_persona" in modifiers:
-                modifier_sections.append(f"- Influencer Style: {modifiers['influencer_persona'].replace('_', ' ').title()}")
-            if "content_style" in modifiers:
-                modifier_sections.append(f"- Content Style: {modifiers['content_style'].replace('_', ' ').title()}")
-            if "follower_relationship" in modifiers:
-                modifier_sections.append(f"- Follower Relationship: {modifiers['follower_relationship'].replace('_', ' ').title()}")
-            if "monetization_approach" in modifiers:
-                modifier_sections.append(f"- Monetization: {modifiers['monetization_approach'].replace('_', ' ').title()}")
-    
-    # Media/News account modifiers
-    elif account_type == "media_news":
-        if modifiers:
-            modifier_sections.append("MEDIA PROFILE:")
-            if "editorial_stance" in modifiers:
-                modifier_sections.append(f"- Editorial Stance: {modifiers['editorial_stance'].replace('_', ' ').title()}")
-            if "reporting_style" in modifiers:
-                modifier_sections.append(f"- Reporting Style: {modifiers['reporting_style'].replace('_', ' ').title()}")
-            if "audience_tone" in modifiers:
-                modifier_sections.append(f"- Audience Tone: {modifiers['audience_tone'].replace('_', ' ').title()}")
-            if "content_priority" in modifiers:
-                modifier_sections.append(f"- Content Focus: {modifiers['content_priority'].replace('_', ' ').title()}")
-    
-    # Bot account modifiers
-    elif account_type == "bot":
-        if modifiers:
-            modifier_sections.append("BOT CHARACTERISTICS:")
-            if "bot_personality" in modifiers:
-                modifier_sections.append(f"- Bot Personality: {modifiers['bot_personality'].replace('_', ' ').title()}")
-            if "response_pattern" in modifiers:
-                modifier_sections.append(f"- Response Pattern: {modifiers['response_pattern'].replace('_', ' ').title()}")
-            if "content_type" in modifiers:
-                modifier_sections.append(f"- Content Type: {modifiers['content_type'].replace('_', ' ').title()}")
-    
-    # Spam/Scam account modifiers
-    elif account_type == "spam_scam":
-        if modifiers:
-            modifier_sections.append("SCAM CHARACTERISTICS:")
-            if "scam_approach" in modifiers:
-                modifier_sections.append(f"- Scam Approach: {modifiers['scam_approach'].replace('_', ' ').title()}")
-            if "writing_quality" in modifiers:
-                modifier_sections.append(f"- Writing Quality: {modifiers['writing_quality'].replace('_', ' ').title()}")
-            if "target_vulnerability" in modifiers:
-                modifier_sections.append(f"- Target Vulnerability: {modifiers['target_vulnerability'].replace('_', ' ').title()}")
-    
-    # Meme account modifiers
-    elif account_type == "creative_meme":
-        if modifiers:
-            modifier_sections.append("MEME CHARACTERISTICS:")
-            if "humor_style" in modifiers:
-                modifier_sections.append(f"- Humor Style: {modifiers['humor_style'].replace('_', ' ').title()}")
-            if "meme_format" in modifiers:
-                modifier_sections.append(f"- Meme Format: {modifiers['meme_format'].replace('_', ' ').title()}")
-            if "target_demographic" in modifiers:
-                modifier_sections.append(f"- Target Demographic: {modifiers['target_demographic'].replace('_', ' ').title()}")
-            if "content_freshness" in modifiers:
-                modifier_sections.append(f"- Content Freshness: {modifiers['content_freshness'].replace('_', ' ').title()}")
+    if modifiers and account_type in PROMPT_SECTIONS_BY_ACCOUNT_TYPE:
+        section_config = PROMPT_SECTIONS_BY_ACCOUNT_TYPE[account_type]
+        modifier_sections.append(section_config["section_title"])
+        
+        # Add each modifier that exists in both the account and the configuration
+        for modifier_key, label in section_config["modifier_labels"].items():
+            if modifier_key in modifiers:
+                formatted_value = modifiers[modifier_key].replace("_", " ").title()
+                modifier_sections.append(f"- {label}: {formatted_value}")
     
     modifier_text = "\n".join(modifier_sections) if modifier_sections else "No specific modifiers defined."
     
     prompt = f"""You are roleplaying as a social media account with the following characteristics:
 
-ACCOUNT TYPE: {account_type.replace("_", " ").title()}
+ACCOUNT TYPE: {account_type_readable}
 PERSONA: {persona_readable}
 
 {modifier_text}

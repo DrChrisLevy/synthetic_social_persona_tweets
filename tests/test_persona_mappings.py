@@ -23,7 +23,11 @@ class TestPersonaModifierMappings:
         for persona in teen_personas:
             modifiers = sample_modifiers("individual", persona)
             assert modifiers["life_stage"] == "teenager", f"{persona} should have teenager life stage"
-            assert modifiers["education_level"] in ["high_school_dropout", "high_school_grad"], f"{persona} should have high school education"
+            # Theatre kids and athletes might go to some college, anxiety-ridden high schooler is more restricted
+            if "anxiety_ridden" in persona:
+                assert modifiers["education_level"] in ["high_school_dropout", "high_school_grad"], f"{persona} should have high school education"
+            else:
+                assert modifiers["education_level"] in ["high_school_grad", "some_college"], f"{persona} should have high school or some college education"
     
     def test_student_personas_get_college_life_stage(self):
         """Student personas should get 'college_student' life stage."""
@@ -53,8 +57,12 @@ class TestPersonaModifierMappings:
                 assert modifiers["education_level"] == "graduate_degree", f"{persona} should have graduate degree"
             elif "teacher" in persona:
                 assert modifiers["education_level"] in ["college_degree", "graduate_degree"], f"{persona} should have college+ education"
+            elif "nurse" in persona:
+                assert modifiers["education_level"] in ["college_degree", "trade_school", "graduate_degree"], f"{persona} should have nursing-appropriate education"
             else:
-                assert modifiers["education_level"] in ["college_degree", "some_college"], f"{persona} should have college-level education"
+                # Other professionals can have varied educational backgrounds
+                valid_education = {"college_degree", "some_college", "trade_school", "graduate_degree"}
+                assert modifiers["education_level"] in valid_education, f"{persona} should have professional-level education"
     
     def test_parent_personas_get_parent_life_stage(self):
         """Parent personas should get 'parent' life stage and family topics."""
