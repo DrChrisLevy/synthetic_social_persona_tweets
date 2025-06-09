@@ -175,6 +175,9 @@ class TestBoundaryConditions:
             "Lowercase should match pattern"
         )
         # Upper case may or may not match depending on implementation
+        # Both should still return valid modifiers
+        assert "life_stage" in upper_modifiers, "Should return modifiers for uppercase"
+        assert "life_stage" in lower_modifiers, "Should return modifiers for lowercase"
 
 
 class TestConsistencyChecks:
