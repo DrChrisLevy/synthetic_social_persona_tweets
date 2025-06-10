@@ -647,7 +647,7 @@ PERSONA: {persona_readable}
 
 {modifier_text}
 
-Generate 50-100 realistic social media posts that this account would make. Each post should:
+Generate a list of realistic social media posts that this account would make. Each post should:
 
 1. Reflect the persona's personality and characteristics from above
 2. Use language, tone, and topics appropriate for this specific account type and persona
@@ -661,46 +661,90 @@ Generate 50-100 realistic social media posts that this account would make. Each 
 Be creative and authentic - make these posts feel like they come from this specific type of account
 
 
-Return a list of 50-100 posts seperated by double newlines."""
+Return a list of posts separated by double newlines. Do not number the posts. The format should be:
+
+post1
+
+post2
+
+post3
+
+post4
+
+and so on...
+"""
 
     return prompt
 
 
-def generate_posts_for_account(account: dict, num_posts: int = 75) -> dict:
-    """Generate a complete account profile with system prompt ready for LLM generation."""
+def main():
+    # Model configurations
+    import time
+    from uuid import uuid4
 
-    return {
-        "account_profile": account,
-        "system_prompt": generate_system_prompt(account),
-        "instructions": f"Send this system prompt to an LLM to generate {num_posts} realistic posts for this account.",
-        "metadata": {
-            "total_modifiers": len(account["modifiers"]),
-            "persona_category": account["account_type"],
-            "generation_ready": True,
+    from openai import OpenAI
+    from sqlitedict import SqliteDict
+
+    db = SqliteDict("posts.db", autocommit=True)
+    configs = {
+        "Qwen/Qwen2.5-7B-Instruct": {
+            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-7b-instruct.modal.run/v1",
+            "model": "Qwen/Qwen2.5-7B-Instruct",
+            "api_key": "not-needed",
+        },
+        "google/gemma-3-12b-it": {
+            "host_url": "https://drchrislevy--vllm-openai-compatible-gemma-3-12b-it.modal.run/v1",
+            "model": "google/gemma-3-12b-it",
+            "api_key": "not-needed",
+        },
+        "Qwen/Qwen2.5-32B-Instruct": {
+            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-32b-instruct.modal.run/v1",
+            "model": "Qwen/Qwen2.5-32B-Instruct",
+            "api_key": "not-needed",
+        },
+        "Qwen/Qwen2.5-72B-Instruct": {
+            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-72b-instruct.modal.run/v1",
+            "model": "Qwen/Qwen2.5-72B-Instruct",
+            "api_key": "not-needed",
         },
     }
 
-
-# ---------- quick demo ---------- #
-if __name__ == "__main__":
-    print("=== SAMPLE ACCOUNTS ===")
-    for i in range(3):
+    while True:
         account = sample_account()
-        print(f"\nAccount {i + 1}:")
-        print(f"  Type: {account['account_type']}")
-        print(f"  Persona: {account['persona']}")
-        modifier_keys = list(account["modifiers"].keys())[:3]  # Show first 3 modifiers
-        modifier_summary = ", ".join(
-            [f"{k}: {account['modifiers'][k]}" for k in modifier_keys]
+        system_prompt = generate_system_prompt(account)
+        config_key = random.choice(list(configs.keys()))
+        config = configs[config_key]
+        model = config["model"]
+        ct = time.time()
+        client = OpenAI(
+            base_url=config["host_url"],
+            api_key=config["api_key"],
+            timeout=60.0 * 60.0,  # 1 hour timeout for long requests
         )
-        print(f"  Key Modifiers: {modifier_summary}")
+        response = client.chat.completions.create(
+            model=config["model"],
+            temperature=round(random.uniform(0, 1.0), 2),
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                },
+                {
+                    "role": "user",
+                    "content": "Generate a list of realistic social media posts that this account would make. Separate each post with a double newline. Do not number the posts.",
+                },
+            ],
+        )
+        id = str(uuid4())
+        res = {
+            "model": model,
+            "id": id,
+            "posts": response.choices[0].message.content,
+            "account": account,
+        }
+        db[id] = res
+        print(f"Generated Response in {time.time() - ct} seconds for {model}")
 
-    print("\n" + "=" * 50)
-    print("=== FULL GENERATION EXAMPLE ===")
-    example_account = sample_account()
-    full_generation = generate_posts_for_account(example_account)
 
-    print(f"\nAccount Profile: {example_account['persona']}")
-    print(f"Account Type: {example_account['account_type']}")
-    print("\n--- SYSTEM PROMPT ---")
-    print(full_generation["system_prompt"])
+if __name__ == "__main__":
+    main()
