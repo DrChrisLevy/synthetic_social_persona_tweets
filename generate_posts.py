@@ -688,24 +688,25 @@ def generate_posts():
     from sqlitedict import SqliteDict
 
     db = SqliteDict("posts.db", autocommit=True)
+    # Add your host URLs here. I had deployed models on modal.
     configs = {
         "Qwen/Qwen2.5-7B-Instruct": {
-            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-7b-instruct.modal.run/v1",
+            "host_url": "<your-host-url>/v1",
             "model": "Qwen/Qwen2.5-7B-Instruct",
             "api_key": "not-needed",
         },
         "google/gemma-3-12b-it": {
-            "host_url": "https://drchrislevy--vllm-openai-compatible-gemma-3-12b-it.modal.run/v1",
+            "host_url": "<your-host-url>/v1",
             "model": "google/gemma-3-12b-it",
             "api_key": "not-needed",
         },
         "Qwen/Qwen2.5-32B-Instruct": {
-            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-32b-instruct.modal.run/v1",
+            "host_url": "<your-host-url>/v1",
             "model": "Qwen/Qwen2.5-32B-Instruct",
             "api_key": "not-needed",
         },
         "Qwen/Qwen2.5-72B-Instruct": {
-            "host_url": "https://drchrislevy--vllm-openai-compatible-qwen2-5-72b-instruct.modal.run/v1",
+            "host_url": "<your-host-url>/v1",
             "model": "Qwen/Qwen2.5-72B-Instruct",
             "api_key": "not-needed",
         },
