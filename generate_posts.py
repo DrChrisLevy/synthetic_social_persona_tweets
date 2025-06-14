@@ -1,5 +1,7 @@
 import random
 
+import pandas as pd
+
 # 🗂️ Master data structure - ONE PLACE to edit everything
 ACCOUNT_DATA = {
     "individual": {
@@ -677,7 +679,7 @@ and so on...
     return prompt
 
 
-def main():
+def generate_posts():
     # Model configurations
     import time
     from uuid import uuid4
@@ -746,5 +748,38 @@ def main():
         print(f"Generated Response in {time.time() - ct} seconds for {model}")
 
 
-if __name__ == "__main__":
-    main()
+def format_data_set():
+    from sqlitedict import SqliteDict
+
+    db = SqliteDict("posts.db", autocommit=True)
+    records = []
+    for k, v in db.items():
+        # Get account metadata
+        account_metadata = {
+            "user_id": v["id"],
+            "account_type": v["account"]["account_type"],
+            "persona": v["account"]["persona"],
+            "model": v["model"],
+        }
+        # Add modifiers
+        account_metadata.update(v["account"]["modifiers"])
+
+        # Process posts
+        posts = v["posts"].split("\n\n")
+        posts = [p.strip() for p in posts if p.strip()]
+        posts = [p for p in posts if p]
+        posts = [p for p in posts if set(p) != set("-")]
+
+        # Create one record per post
+        for post in posts:
+            record = account_metadata.copy()
+            record["post"] = post
+            records.append(record)
+
+    # Convert to DataFrame
+    df = pd.DataFrame(records)
+
+    # Save as parquet
+    df.to_parquet("social_media_posts.parquet", index=False)
+
+    return records
